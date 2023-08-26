@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c19d60a9fba2410b8f3d2d1c5ad9d34a" Name="Diagram1">
+        <EntityTypeShape EntityType="GestionStockModel.Categorie" Width="1.5" PointX="0.5" PointY="0.875" />
+        <EntityTypeShape EntityType="GestionStockModel.Client" Width="1.5" PointX="0.5" PointY="2.75" />
+        <EntityTypeShape EntityType="GestionStockModel.Commande" Width="1.5" PointX="3.875" PointY="3.25" />
+        <EntityTypeShape EntityType="GestionStockModel.DetailsCommande" Width="1.5" PointX="5" PointY="0.625" />
+        <EntityTypeShape EntityType="GestionStockModel.Produit" Width="1.5" PointX="2.75" PointY="0.5" />
+        <EntityTypeShape EntityType="GestionStockModel.Utilisateurs" Width="1.5" PointX="8" PointY="1.75" />
+        <AssociationConnector Association="GestionStockModel.FK_Produit_Categorie" />
+        <AssociationConnector Association="GestionStockModel.FK_Commande_Client" />
+        <AssociationConnector Association="GestionStockModel.FK_DetailsCommande_Commande" />
+        <AssociationConnector Association="GestionStockModel.FK_DetailsCommande_Produit" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

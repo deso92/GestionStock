@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GESTION_DE_STOCKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CATEGORIE">
+    <Key>
+      <PropertyRef Name="Id_categorie" />
+    </Key>
+    <Property Name="Id_categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_categorie" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PRODUITs" Relationship="Self.FK_PRODUIT_CATEGORIE" FromRole="CATEGORIE" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="CLIENT">
+    <Key>
+      <PropertyRef Name="Id_client" />
+    </Key>
+    <Property Name="Id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_client" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Prenom_client" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Adresse_client" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telephone_client" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Pays_client" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ville_client" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="COMMANDEs" Relationship="Self.FK_COMMANDE_CLIENT" FromRole="CLIENT" ToRole="COMMANDE" />
+  </EntityType>
+  <EntityType Name="COMMANDE">
+    <Key>
+      <PropertyRef Name="Id_commande" />
+    </Key>
+    <Property Name="Id_commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_commande" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Id_client" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CLIENT" Relationship="Self.FK_COMMANDE_CLIENT" FromRole="COMMANDE" ToRole="CLIENT" />
+    <NavigationProperty Name="DETAILS_COMMANDE" Relationship="Self.FK_DETAILS_COMMANDE_COMMANDE" FromRole="COMMANDE" ToRole="DETAILS_COMMANDE" />
+  </EntityType>
+  <EntityType Name="DETAILS_COMMANDE">
+    <Key>
+      <PropertyRef Name="Id_details_commande" />
+    </Key>
+    <Property Name="Id_details_commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_commande" Type="Int32" Nullable="false" />
+    <Property Name="Id_produit" Type="Int32" Nullable="false" />
+    <Property Name="Quantite_produit" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="COMMANDE" Relationship="Self.FK_DETAILS_COMMANDE_COMMANDE" FromRole="DETAILS_COMMANDE" ToRole="COMMANDE" />
+    <NavigationProperty Name="PRODUIT" Relationship="Self.FK_DETAILS_COMMANDE_PRODUIT" FromRole="DETAILS_COMMANDE" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="PRODUIT">
+    <Key>
+      <PropertyRef Name="Id_produit" />
+    </Key>
+    <Property Name="Id_produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_produit" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantite_produit" Type="Int32" Nullable="false" />
+    <Property Name="Prix_produit" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Image_produit" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Id_categororie" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CATEGORIE" Relationship="Self.FK_PRODUIT_CATEGORIE" FromRole="PRODUIT" ToRole="CATEGORIE" />
+    <NavigationProperty Name="DETAILS_COMMANDE" Relationship="Self.FK_DETAILS_COMMANDE_PRODUIT" FromRole="PRODUIT" ToRole="DETAILS_COMMANDE" />
+  </EntityType>
+  <EntityType Name="UTILISATEUR">
+    <Key>
+      <PropertyRef Name="email_utilisateur" />
+    </Key>
+    <Property Name="email_utilisateur" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nom_utilisateur" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mot_de_passe" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PRODUIT_CATEGORIE">
+    <End Role="CATEGORIE" Type="Self.CATEGORIE" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIE">
+        <PropertyRef Name="Id_categorie" />
+      </Principal>
+      <Dependent Role="PRODUIT">
+        <PropertyRef Name="Id_categororie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COMMANDE_CLIENT">
+    <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENT">
+        <PropertyRef Name="Id_client" />
+      </Principal>
+      <Dependent Role="COMMANDE">
+        <PropertyRef Name="Id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETAILS_COMMANDE_COMMANDE">
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DETAILS_COMMANDE" Type="Self.DETAILS_COMMANDE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMMANDE">
+        <PropertyRef Name="Id_commande" />
+      </Principal>
+      <Dependent Role="DETAILS_COMMANDE">
+        <PropertyRef Name="Id_commande" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETAILS_COMMANDE_PRODUIT">
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DETAILS_COMMANDE" Type="Self.DETAILS_COMMANDE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUIT">
+        <PropertyRef Name="Id_produit" />
+      </Principal>
+      <Dependent Role="DETAILS_COMMANDE">
+        <PropertyRef Name="Id_produit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GESTION_DE_STOCKEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CATEGORIEs" EntityType="Self.CATEGORIE" />
+    <EntitySet Name="CLIENTs" EntityType="Self.CLIENT" />
+    <EntitySet Name="COMMANDEs" EntityType="Self.COMMANDE" />
+    <EntitySet Name="DETAILS_COMMANDE" EntityType="Self.DETAILS_COMMANDE" />
+    <EntitySet Name="PRODUITs" EntityType="Self.PRODUIT" />
+    <EntitySet Name="UTILISATEURs" EntityType="Self.UTILISATEUR" />
+    <AssociationSet Name="FK_PRODUIT_CATEGORIE" Association="Self.FK_PRODUIT_CATEGORIE">
+      <End Role="CATEGORIE" EntitySet="CATEGORIEs" />
+      <End Role="PRODUIT" EntitySet="PRODUITs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COMMANDE_CLIENT" Association="Self.FK_COMMANDE_CLIENT">
+      <End Role="CLIENT" EntitySet="CLIENTs" />
+      <End Role="COMMANDE" EntitySet="COMMANDEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETAILS_COMMANDE_COMMANDE" Association="Self.FK_DETAILS_COMMANDE_COMMANDE">
+      <End Role="COMMANDE" EntitySet="COMMANDEs" />
+      <End Role="DETAILS_COMMANDE" EntitySet="DETAILS_COMMANDE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETAILS_COMMANDE_PRODUIT" Association="Self.FK_DETAILS_COMMANDE_PRODUIT">
+      <End Role="PRODUIT" EntitySet="PRODUITs" />
+      <End Role="DETAILS_COMMANDE" EntitySet="DETAILS_COMMANDE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

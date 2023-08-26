@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GestionStockModelStoreContainer" CdmEntityContainer="GestionStockEntities">
+    <EntitySetMapping Name="Categorie">
+      <EntityTypeMapping TypeName="GestionStockModel.Categorie">
+        <MappingFragment StoreEntitySet="Categorie">
+          <ScalarProperty Name="Nom_categorie" ColumnName="Nom_categorie" />
+          <ScalarProperty Name="Id_categorie" ColumnName="Id_categorie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="GestionStockModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="Email_client" ColumnName="Email_client" />
+          <ScalarProperty Name="Ville_client" ColumnName="Ville_client" />
+          <ScalarProperty Name="Pays_client" ColumnName="Pays_client" />
+          <ScalarProperty Name="Telephone_client" ColumnName="Telephone_client" />
+          <ScalarProperty Name="Adresse_client" ColumnName="Adresse_client" />
+          <ScalarProperty Name="Prenom_client" ColumnName="Prenom_client" />
+          <ScalarProperty Name="Nom_client" ColumnName="Nom_client" />
+          <ScalarProperty Name="Id_client" ColumnName="Id_client" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Commande">
+      <EntityTypeMapping TypeName="GestionStockModel.Commande">
+        <MappingFragment StoreEntitySet="Commande">
+          <ScalarProperty Name="Id_client" ColumnName="Id_client" />
+          <ScalarProperty Name="Date_commande" ColumnName="Date_commande" />
+          <ScalarProperty Name="Id_commande" ColumnName="Id_commande" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailsCommande">
+      <EntityTypeMapping TypeName="GestionStockModel.DetailsCommande">
+        <MappingFragment StoreEntitySet="DetailsCommande">
+          <ScalarProperty Name="Quantite_produit" ColumnName="Quantite_produit" />
+          <ScalarProperty Name="Id_produit" ColumnName="Id_produit" />
+          <ScalarProperty Name="Id_commande" ColumnName="Id_commande" />
+          <ScalarProperty Name="Id_details_commande" ColumnName="Id_details_commande" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produit">
+      <EntityTypeMapping TypeName="GestionStockModel.Produit">
+        <MappingFragment StoreEntitySet="Produit">
+          <ScalarProperty Name="Id_categororie" ColumnName="Id_categororie" />
+          <ScalarProperty Name="Image_produit" ColumnName="Image_produit" />
+          <ScalarProperty Name="Prix_produit" ColumnName="Prix_produit" />
+          <ScalarProperty Name="Quantite_produit" ColumnName="Quantite_produit" />
+          <ScalarProperty Name="Nom_produit" ColumnName="Nom_produit" />
+          <ScalarProperty Name="Id_produit" ColumnName="Id_produit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilisateurs">
+      <EntityTypeMapping TypeName="GestionStockModel.Utilisateurs">
+        <MappingFragment StoreEntitySet="Utilisateurs">
+          <ScalarProperty Name="Mot_de_passe" ColumnName="Mot_de_passe" />
+          <ScalarProperty Name="GroupeUtilisateur" ColumnName="GroupeUtilisateur" />
+          <ScalarProperty Name="Nom_utilisateur" ColumnName="Nom_utilisateur" />
+          <ScalarProperty Name="email_utilisateur" ColumnName="email_utilisateur" />
+          <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
